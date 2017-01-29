@@ -13,7 +13,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ngorm/ngorm/dialects"
 	"github.com/ngorm/ngorm/model"
 	"github.com/ngorm/ngorm/regexes"
 )
@@ -75,7 +74,7 @@ func (q *QL) PrimaryKey(keys []string) string {
 
 // DataTypeOf return data's sql type
 func (q *QL) DataTypeOf(field *model.StructField) (string, error) {
-	var dataValue, sqlType, _, additionalType = dialects.ParseFieldStructForDialect(field)
+	var dataValue, sqlType, _, additionalType = model.ParseFieldStructForDialect(field)
 	switch dataValue.Kind() {
 	case reflect.Bool:
 		sqlType = "bool"
