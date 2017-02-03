@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/ngorm/ngorm/dialects"
 	"github.com/ngorm/ngorm/model"
 	"github.com/ngorm/ngorm/regexes"
 )
@@ -40,6 +41,11 @@ func Memory() *QL {
 //way use the Memory only for testing else you might lose all of your data.
 func File() *QL {
 	return &QL{name: "ql"}
+}
+
+func init() {
+	dialects.Register(Memory())
+	dialects.Register(File())
 }
 
 // GetName get dialect's name
