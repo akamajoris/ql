@@ -71,7 +71,7 @@ func TestDialect(t *testing.T) {
 	}
 
 	if d.HasIndex("Orders", "OrdersID") {
-		t.Error("expected to be fasle")
+		t.Error("expected to be false")
 	}
 
 	// Has Table

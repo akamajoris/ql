@@ -1,7 +1,7 @@
 // Package ql exposes implementations and functions that enables ngorm to work
 // with ql database.
 //
-// ql is an embedded sql database. This database doesn't conform 100% qith the
+// ql is an embedded sql database. This database doesn't conform 100% with the
 // SQL standard. The link to the project is https://github.com/cznic/ql
 package ql
 
@@ -23,7 +23,7 @@ import (
 //
 // For some reason the ql database doesn't support multiple databases, as
 // databases are file based. So, the name of the file is the name of the
-// database.. Which doesn't affect the querries, since the database name is
+// database.. Which doesn't affect the queries, since the database name is
 // irrelevant assuming the SQLCommon interface is the handle over the open
 // database.
 type QL struct {
@@ -37,7 +37,7 @@ func Memory() *QL {
 	return &QL{name: "ql-mem"}
 }
 
-//File returns the dialcet for file backed ql database. This is the recommended
+//File returns the dialect for file backed ql database. This is the recommended
 //way use the Memory only for testing else you might lose all of your data.
 func File() *QL {
 	return &QL{name: "ql"}
@@ -125,11 +125,11 @@ func (q *QL) DataTypeOf(field *model.StructField) (string, error) {
 
 // HasIndex check has index or not
 func (q *QL) HasIndex(tableName string, indexName string) bool {
-	querry := "select count() from __Index where Name=$1  && TableName=$2"
+	query := "select count() from __Index where Name=$1  && TableName=$2"
 	var count int
-	err := q.db.QueryRow(querry, indexName, tableName).Scan(&count)
+	err := q.db.QueryRow(query, indexName, tableName).Scan(&count)
 	if err != nil {
-		//TODO; Propery log or return this error?
+		//TODO; Ropery log or return this error?
 	}
 	return count > 0
 }
@@ -154,22 +154,22 @@ func (q *QL) RemoveIndex(tableName string, indexName string) error {
 
 // HasTable check has table or not
 func (q *QL) HasTable(tableName string) bool {
-	querry := "select count() from __Table where Name=$1"
+	query := "select count() from __Table where Name=$1"
 	var count int
-	err := q.db.QueryRow(querry, tableName).Scan(&count)
+	err := q.db.QueryRow(query, tableName).Scan(&count)
 	if err != nil {
-		//TODO; Propery log or return this error?
+		//TODO; Ropery log or return this error?
 	}
 	return count > 0
 }
 
 // HasColumn check has column or not
 func (q *QL) HasColumn(tableName string, columnName string) bool {
-	querry := "select count() from __Column where Name=$1  && TableName=$2"
+	query := "select count() from __Column where Name=$1  && TableName=$2"
 	var count int
-	err := q.db.QueryRow(querry, columnName, tableName).Scan(&count)
+	err := q.db.QueryRow(query, columnName, tableName).Scan(&count)
 	if err != nil {
-		//TODO; Propery log or return this error?
+		//TODO; Ropery log or return this error?
 	}
 	return count > 0
 }
@@ -214,8 +214,8 @@ func (q *QL) CurrentDatabase() string {
 //QueryFieldName returns prefix for field names if name. For instance users.id
 //to point to users id field.
 //
-// ql doesnt support this, so it returns an empty string for tablename prefix on
-// fields. insead of users.id to becomes id
+// ql doesn't support this, so it returns an empty string for tablename prefix on
+// fields. instead of users.id to becomes id
 func (q QL) QueryFieldName(name string) string {
 	return ""
 }
