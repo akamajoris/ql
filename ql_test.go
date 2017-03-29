@@ -9,6 +9,8 @@ import (
 
 	"math/big"
 
+	"strings"
+
 	_ "github.com/cznic/ql/driver"
 	"github.com/ngorm/ngorm/engine"
 	"github.com/ngorm/ngorm/model"
@@ -82,6 +84,43 @@ func TestDialect(t *testing.T) {
 		t.Error("expected to be true")
 	}
 
+	//Query field name
+	if d.QueryFieldName("users") != "" {
+		t.Errorf("didn't expect %s", d.QueryFieldName("users"))
+	}
+
+	// current database
+	if d.CurrentDatabase() != "" {
+		t.Errorf("didn't expect %s", d.CurrentDatabase())
+	}
+	tn := "users"
+	fn := "city"
+	dest := "id"
+	o := d.BuildForeignKeyName(tn, fn, dest)
+	exp := "users_city_id_foreign"
+	if o != exp {
+		t.Errorf("expected %s got %s", exp, o)
+	}
+
+	// last insert id suffix
+	if d.LastInsertIDReturningSuffix(tn, fn) != "" {
+		t.Errorf("didn't expect %s", d.LastInsertIDReturningSuffix(tn, fn))
+	}
+
+	// sselect from dummy table
+	if d.SelectFromDummyTable() != "" {
+		t.Errorf("didn't expect %s", d.SelectFromDummyTable())
+	}
+
+	// limit and offset
+	limit := 5
+	offset := 10
+	o = d.LimitAndOffsetSQL(limit, offset)
+	exp = "LIMIT 5 OFFSET 10"
+	o = strings.TrimSpace(o)
+	if o != exp {
+		t.Errorf("expected %s got %s", exp, o)
+	}
 }
 
 func TestQL_Quote(t *testing.T) {
