@@ -127,10 +127,7 @@ func (q *QL) DataTypeOf(field *model.StructField) (string, error) {
 func (q *QL) HasIndex(tableName string, indexName string) bool {
 	query := "select count() from __Index where Name=$1  && TableName=$2"
 	var count int
-	err := q.db.QueryRow(query, indexName, tableName).Scan(&count)
-	if err != nil {
-		//TODO; Ropery log or return this error?
-	}
+	_ = q.db.QueryRow(query, indexName, tableName).Scan(&count)
 	return count > 0
 }
 
@@ -156,10 +153,7 @@ func (q *QL) RemoveIndex(tableName string, indexName string) error {
 func (q *QL) HasTable(tableName string) bool {
 	query := "select count() from __Table where Name=$1"
 	var count int
-	err := q.db.QueryRow(query, tableName).Scan(&count)
-	if err != nil {
-		//TODO; Ropery log or return this error?
-	}
+	_ = q.db.QueryRow(query, tableName).Scan(&count)
 	return count > 0
 }
 
@@ -167,10 +161,7 @@ func (q *QL) HasTable(tableName string) bool {
 func (q *QL) HasColumn(tableName string, columnName string) bool {
 	query := "select count() from __Column where Name=$1  && TableName=$2"
 	var count int
-	err := q.db.QueryRow(query, columnName, tableName).Scan(&count)
-	if err != nil {
-		//TODO; Ropery log or return this error?
-	}
+	_ = q.db.QueryRow(query, columnName, tableName).Scan(&count)
 	return count > 0
 }
 
