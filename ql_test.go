@@ -149,6 +149,7 @@ type Sample struct {
 	Big       big.Int
 	Rat       big.Rat
 	Blob      []byte
+	Bool      bool
 }
 
 func TestQL_DataTypeOf(t *testing.T) {
@@ -202,6 +203,15 @@ func TestQL_DataTypeOf(t *testing.T) {
 			}
 		case "Blob":
 			e := "blob"
+			s, err := q.DataTypeOf(f)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if s != e {
+				t.Errorf("expected %s got %s", e, s)
+			}
+		case "Bool":
+			e := "bool"
 			s, err := q.DataTypeOf(f)
 			if err != nil {
 				t.Fatal(err)
