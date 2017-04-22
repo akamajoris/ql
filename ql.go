@@ -60,7 +60,7 @@ func (q *QL) SetDB(db model.SQLCommon) {
 
 // BindVar return the placeholder for actual values in SQL statements, in many dbs it is "?", Postgres using $1
 func (q QL) BindVar(i int) string {
-	return fmt.Sprintf("$%d", i)
+	return "$" + strconv.FormatInt(int64(i), 10)
 }
 
 // Quote quotes field name to avoid SQL parsing exceptions by using a reserved word as a field name
