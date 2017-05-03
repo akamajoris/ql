@@ -11,7 +11,6 @@ import (
 
 	"strings"
 
-	_ "github.com/cznic/ql/driver"
 	"github.com/ngorm/ngorm/engine"
 	"github.com/ngorm/ngorm/model"
 	"github.com/ngorm/ngorm/scope"

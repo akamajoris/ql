@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	_ "github.com/cznic/ql/driver"
 	"github.com/ngorm/ngorm/dialects"
 	"github.com/ngorm/ngorm/model"
 	"github.com/ngorm/ngorm/regexes"
