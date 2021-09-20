@@ -14,9 +14,9 @@ import (
 	"time"
 
 	_ "github.com/cznic/ql/driver"
-	"github.com/ngorm/ngorm/dialects"
-	"github.com/ngorm/ngorm/model"
-	"github.com/ngorm/ngorm/regexes"
+	"github.com/akamajoris/ngorm/dialects"
+	"github.com/akamajoris/ngorm/model"
+	"github.com/akamajoris/ngorm/regexes"
 )
 
 //QL implements the dialects.Dialect interface that uses ql database as the SQl

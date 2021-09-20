@@ -11,9 +11,9 @@ import (
 
 	"strings"
 
-	"github.com/ngorm/ngorm/engine"
-	"github.com/ngorm/ngorm/model"
-	"github.com/ngorm/ngorm/scope"
+	"github.com/akamajoris/ngorm/engine"
+	"github.com/akamajoris/ngorm/model"
+	"github.com/akamajoris/ngorm/scope"
 )
 
 type Department struct {
